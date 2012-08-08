@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div class="row-fluid">
+
+            {% include "sidebar.html" %}
+
+            <div class="span9">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="page-header">
+                            <h2>Adicionar Técnico</h2>
+                        </div>
+                        <form action="." method="POST">
+                        {% csrf_token %}
+                        {{ form }}
+                        <div class="form-actions">
+                            <button id="searchSubmit" class="btn btn-primary pull-right" type="submit">Enviar</button>
+                        </div>
+                        </form>
+                     </div>
+                </div>
+                <!--Body content-->
+            </div>
+        </div>
+{% endblock content %}

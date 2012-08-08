@@ -1,0 +1,20 @@
+{% load url from future %}
+        <div class="span3">
+          <div class="well sidebar-nav">
+            <ul class="nav nav-list">
+              <li><a href="/">Home</a></li>
+              <li class="divider"></li>
+              <li class="nav-header">Cadastro</li>
+              <li><a href="{% url 'core:technician_search' %}">Técnicos</a></li>
+              <li><a href="{% url 'core:task_search' %}">Tarefas</a></li>
+              <li class="divider"></li>
+              <li class="nav-header">Centro de Despacho</li>
+              <li><a href="#">Assignação de Tarefas</a></li>
+              <li><a href="#">Agendador Automático</a></li>
+              <li class="divider"></li>
+              <li class="nav-header">Acompanhamento de Atividades</li>
+              <li><a href="#">Atividades em Andamento</a></li>
+              <li><a href="#">Histórico de Atividades</a></li>
+            </ul>
+          </div><!--/.well -->
+        </div><!--/span-->

@@ -1,0 +1,23 @@
+{% load url from future %}
+{% if results|length %}
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="span3">Tarefa</th>
+                <th class="span3">Tipo de Tarefa</th>
+                <th class="span3">Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for task in results %}
+            <tr>
+                <td class="span3"><a href="#">{{ task.name }}</a></td>
+                <td class="span3">{{ task.task_type.name }}</td>
+                <td class="span3">{{ task.get_status_display }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% else %}
+    <p>Nenhum registro encontrado!</p>
+{% endif %}

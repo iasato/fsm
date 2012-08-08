@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+      <div class="row-fluid show-grid">
+        <div class="span4">
+          <h3>Login</h3>
+          <form class="well" method="post" action="{% url django.contrib.auth.views.login %}">
+            {% csrf_token %}
+            <label><label for="id_username">Usuário</label></label>
+            <input id="id_username" type="text" name="username" maxlength="30" class="span10" placeholder="Digite seu usuário…" />
+            <label><label for="id_password">Senha</label></label>
+            <input type="password" name="password" id="id_password" class="span10" placeholder="Digite sua senha…" />
+            <button type="submit" value="login" class="btn">Entrar</button>
+            <input type="hidden" name="next" value="{{ next }}" />
+          </form>
+          {% if form.errors %}
+          <div class="alert alert-error">Usuário ou senha inválidos. Por favor, tente novamente!</div>
+          {% endif %}
+        </div>
+        <div class="span8"></div>
+      </div>
+
+{% endblock %}

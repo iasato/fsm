@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load url from future %}
+
+{% block add_style %}
+    <style>
+        #spinner {
+          display: none;
+          position: relative;
+        }
+    </style>
+{% endblock %}
+
+{% block content %}
+
+        <div class="row-fluid">
+
+            {% include "sidebar.html" %}
+
+            <div class="span9">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="page-header">
+                            <h2>Buscar Técnico</h2>
+                        </div>
+                        <form onSubmit="return false;">
+                        {% csrf_token %}
+                        {{ form.as_p }}
+                        <p/>
+                        <button id="searchSubmit" class="btn" type="submit">Buscar</button>
+                        </form>
+                        <hr>
+                        <div class="row-fluid">
+                            <div class="span12" align="center" id="spinner">
+                                <img src="{{ STATIC_URL }}img/spinner.gif"/>
+                            </div>
+                        </div>
+                        <div id="results"></div>
+                     </div>
+                </div>
+                <!--Body content-->
+            </div>
+        </div>
+
+{% endblock content %}
+
+{% block extra_js %}
+    <script type="text/javascript">
+        $( document ).ready( function() {
+            $( '#searchSubmit' ).click( function() {
+                {{ form.technician.name }} = $( '#{{ form.technician.name }}' ).val();
+                {{ form.connection_type.name }} = $( '#{{ form.connection_type.name }}' ).val();
+                $( '#results' ).html( '&nbsp;' ).load( '{% url 'core:ajax_technician_search' %}?{{ form.technician.name }}='
+                    + {{ form.technician.name }} +
+                    '&{{ form.connection_type.name }}=' + {{ form.connection_type.name }});
+            });
+        });
+
+        $( document ).ajaxStart( function() {
+            $( '#spinner' ).show();
+        }).ajaxStop( function() {
+            $( '#spinner' ).hide();
+        });
+    </script>
+{% endblock %}

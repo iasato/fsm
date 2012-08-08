@@ -25,10 +25,14 @@
                         <form onSubmit="return false;">
                         {% csrf_token %}
                         {{ form.as_p }}
-                        <p/>
-                        <button id="searchSubmit" class="btn" type="submit">Buscar</button>
-                        </form>
-                        <hr>
+                        <div class="form-actions">
+                            <div class="span6">
+                                <button id="searchSubmit" class="btn btn-primary" type="submit">Buscar</button>
+                            </div>
+                            <div class="span6">
+                                <a class="btn pull-right" href="#">Adicionar</a>
+                            </div>
+                        </div>
                         <div class="row-fluid">
                             <div class="span12" align="center" id="spinner">
                                 <img src="{{ STATIC_URL }}img/spinner.gif"/>

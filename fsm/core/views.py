@@ -1,13 +1,45 @@
 # -*- coding: utf-8 -*-
 from django.template import RequestContext
+from django.http import HttpResponseRedirect
+from django.core.urlresolvers import reverse
 from django.shortcuts import render_to_response
 from django.shortcuts import get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db.models import Q
 
 from models import Technician, Task
-from forms import TechnicianSearchForm, TaskSearchForm
+from forms import TechnicianForm, TechnicianSearchForm, TaskSearchForm
 
+
+@login_required(login_url='/login/')
+def technician_add(request):
+    if request.method == 'POST':
+        return technician_create(request)
+    else:
+        return technician_new(request)
+
+def technician_new(request):
+    form = TechnicianForm()
+    context = RequestContext(request, {'form': form})
+    return render_to_response('core/technician_add.html', context)
+
+def technician_create(request):
+    form = TechnicianForm(request.POST)
+
+    if not form.is_valid():
+        context = RequestContext(request, {'form': form})
+        return render_to_response('core/technician_add.html', context)
+
+    form.save()
+
+    return HttpResponseRedirect(
+        reverse('core:technician_search'))
+
+@login_required(login_url='/login/')
+def technician(request, pk):
+    t = get_object_or_404(Technician, pk=pk)
+    context = RequestContext(request, {'technician': t})
+    return render_to_response('core/technician.html', context)
 
 @login_required(login_url='/login/')
 def technician_search(request):

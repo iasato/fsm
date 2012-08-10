@@ -10,7 +10,7 @@
         <tbody>
             {% for technician in results %}
             <tr>
-                <td class="span3"><a href="#">{{ technician.name }}</a></td>
+                <td class="span3"><a href="{% url 'core:technician' technician.pk %}">{{ technician.name }}</a></td>
                 <td class="span3">{{ technician.get_connection_type_display }}</td>
             </tr>
             {% endfor %}

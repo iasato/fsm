@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+        <div class="row-fluid">
+
+            {% include "sidebar.html" %}
+
+            <div class="span9">
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="page-header">
+                            <h2>Técnico</h2>
+                            <hr>
+                            <p><strong>Nome:</strong> {{ technician.name }}</p>
+                            <p><strong>Tipo de conexão:</strong> {{ technician.get_connection_type_display }}</p>
+                            {% if technician.user %}
+                            <p><strong>Usuário:</strong> {{ technician.user.username }}</p>
+                            {% endif %}
+                        </div>
+                     </div>
+                </div>
+                <!--Body content-->
+            </div>
+        </div>
+{% endblock content %}
